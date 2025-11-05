@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 
@@ -9,6 +10,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Skills />
         <Projects />
         <Contact />
       </main>
@@ -19,7 +21,7 @@ export default function App() {
               © {new Date().getFullYear()} Naman Sinha. All rights reserved.
             </p>
             <p>
-              Built with React, Tailwind, and a modern 3D touch.
+              Built with React, Tailwind, and a playful interactive 3D touch.
             </p>
           </div>
         </div>

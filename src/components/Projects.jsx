@@ -44,33 +44,52 @@ const projects = [
 ];
 
 function ProjectCard({ title, description, tags, live, repo }) {
+  const isLive = live && live !== '#';
+  const CardWrapper = ({ children }) =>
+    isLive ? (
+      <a href={live} target="_blank" rel="noreferrer" className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-2xl">
+        {children}
+      </a>
+    ) : (
+      <div>{children}</div>
+    );
+
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/80 bg-white/60 dark:bg-neutral-900/60 backdrop-blur shadow-sm hover:shadow-md transition-shadow">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-sky-500/0 to-cyan-400/0 group-hover:from-indigo-500/5 group-hover:via-sky-500/5 group-hover:to-cyan-400/5 transition-colors" />
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">{title}</h3>
-        <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{description}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span key={tag} className="inline-flex items-center rounded-full border border-neutral-300 dark:border-neutral-700 px-2.5 py-1 text-xs text-neutral-700 dark:text-neutral-300">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <div className="mt-5 flex items-center gap-3">
-          {live !== '#' && (
-            <a href={live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-900 dark:text-white hover:underline">
-              <ExternalLink size={16} /> Live demo
-            </a>
-          )}
-          {repo !== '#' && (
-            <a href={repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:underline">
-              <Github size={16} /> Source
-            </a>
-          )}
+    <CardWrapper>
+      <div className="group relative overflow-hidden rounded-2xl border border-neutral-200/70 dark:border-neutral-800/80 bg-white/60 dark:bg-neutral-900/60 backdrop-blur shadow-sm hover:shadow-md transition-shadow">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-sky-500/0 to-cyan-400/0 group-hover:from-indigo-500/10 group-hover:via-sky-500/10 group-hover:to-cyan-400/10 transition-colors" />
+        <div className="p-5">
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+            {title}
+            {isLive && (
+              <span className="inline-flex items-center gap-1 text-xs font-medium text-sky-600 dark:text-sky-400">
+                <ExternalLink size={14} /> Live
+              </span>
+            )}
+          </h3>
+          <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{description}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span key={tag} className="inline-flex items-center rounded-full border border-neutral-300 dark:border-neutral-700 px-2.5 py-1 text-xs text-neutral-700 dark:text-neutral-300">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 flex items-center gap-3">
+            {isLive && (
+              <a href={live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-900 dark:text-white hover:underline">
+                <ExternalLink size={16} /> Live demo
+              </a>
+            )}
+            {repo && repo !== '#' && (
+              <a href={repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:underline">
+                <Github size={16} /> Source
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </CardWrapper>
   );
 }
 
